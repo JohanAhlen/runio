@@ -2,3 +2,5 @@
 *.iml
 target
 *~
+src/main/resources/runkeeper.properties
+src/main/resources/garmin.properties
