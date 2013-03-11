@@ -2,9 +2,9 @@ package com.johanahlen.runsync.garmin.activity;
 
 import org.joda.time.LocalDateTime;
 
-public class Activity {
+public class GarminActivity {
 
-    private Long activityId;
+    private long activityId;
     private String activityName;
     private String activityDescription;
     private String locationName;
@@ -15,7 +15,7 @@ public class Activity {
     private Boolean isActivityEdited;
     private Boolean favorite;
     private Boolean ispr;
-    private Long userId;
+    private long userId;
     private String username;
     private String displayname;
     private LocalDateTime uploadDate;
@@ -41,7 +41,7 @@ public class Activity {
 
     private ActivityDetails activityDetails;
 
-    public Long getActivityId() {
+    public long getActivityId() {
         return activityId;
     }
 
@@ -85,7 +85,7 @@ public class Activity {
         return ispr;
     }
 
-    public Long getUserId() {
+    public long getUserId() {
         return userId;
     }
 

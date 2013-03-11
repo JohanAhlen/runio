@@ -1,9 +1,9 @@
 package com.johanahlen.runsync.garmin.activity;
 
 public class ActivityWrapper {
-    private Activity activity;
+    private GarminActivity activity;
 
-    public Activity getActivity() {
+    public GarminActivity getActivity() {
         return activity;
     }
 }
