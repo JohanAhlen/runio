@@ -1,9 +1,9 @@
 package com.johanahlen.runsync.garmin.activity;
 
-public class Field {
+public class GarminUploadSource {
     private String display;
     private String key;
-    private String fieldNameDisplay;
+    private String version;
 
     public String getDisplay() {
         return display;
@@ -13,7 +13,7 @@ public class Field {
         return key;
     }
 
-    public String getFieldNameDisplay() {
-        return fieldNameDisplay;
+    public String getVersion() {
+        return version;
     }
 }

@@ -1,6 +1,6 @@
 package com.johanahlen.runsync.garmin.activity;
 
-public class SummaryMeasurement {
+public class GarminSummaryMeasurement {
     private String fieldDisplayName;
     private String display;
     private String displayUnit;

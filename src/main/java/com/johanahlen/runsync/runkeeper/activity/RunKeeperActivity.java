@@ -2,12 +2,11 @@ package com.johanahlen.runsync.runkeeper.activity;
 
 import java.util.ArrayList;
 import com.google.gson.annotations.SerializedName;
-import com.johanahlen.runsync.garmin.activity.ActivityDetails;
-import com.johanahlen.runsync.garmin.activity.ActivitySummary;
-import com.johanahlen.runsync.garmin.activity.DetailsMeasurement;
-import com.johanahlen.runsync.garmin.activity.GarminActivity;
-import com.johanahlen.runsync.garmin.activity.Metrics;
-import org.joda.time.DateTimeZone;
+import com.johanahlen.runsync.garmin.activity.GarminActivityDetails;
+import com.johanahlen.runsync.garmin.activity.GarminActivitySummary;
+import com.johanahlen.runsync.garmin.activity.GarminDetailsMeasurement;
+import com.johanahlen.runsync.garmin.activity.GarminMeasurementSummaries;
+import com.johanahlen.runsync.garmin.activity.GarminMetrics;
 import org.joda.time.LocalDateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -19,7 +18,7 @@ public class RunKeeperActivity {
     private String type;
 
     @SerializedName("start_time")
-    private String startTime; // Sat, 1 Jan 2011 00:00:00
+    private LocalDateTime startTime; // Sat, 1 Jan 2011 00:00:00
 
     @SerializedName("total_distance")
     private Double totalDistanceInKm;
@@ -46,16 +45,14 @@ public class RunKeeperActivity {
     @SerializedName("post_to_twitter")
     private Boolean postToTwitter;
 
-    public static RunKeeperActivity fromGarminActivity(GarminActivity garminActivity) {
+    public static RunKeeperActivity fromGarminActivity(GarminActivitySummary garminActivitySummary, GarminActivityDetails garminActivityDetails) {
         RunKeeperActivity result = new RunKeeperActivity();
         result.type = RunKeeperActivity.TYPE_RUNNING;
 
         DateTimeFormatter inputFormat = DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").withZoneUTC();
-        ActivitySummary activitySummary = garminActivity.getActivitySummary();
-        DateTimeFormatter outputFormat = DateTimeFormat.forPattern("EEE, d MMM yyyy HH:mm:ss").withZone(DateTimeZone.forID(activitySummary.getBeginTimestamp().getUom()));
-        LocalDateTime beginTime = LocalDateTime.parse(activitySummary.getBeginTimestamp().getValue(), inputFormat);
-        result.startTime = outputFormat.print(beginTime);
+        GarminMeasurementSummaries activitySummary = garminActivitySummary.getActivitySummary();
 
+        result.startTime = LocalDateTime.parse(activitySummary.getBeginTimestamp().getValue(), inputFormat);
         verifyUom("SumDistance", "kilometer", activitySummary.getSumDistance().getUom());
         result.totalDistanceInKm = Double.parseDouble(activitySummary.getSumDistance().getValue());
 
@@ -65,14 +62,14 @@ public class RunKeeperActivity {
         verifyUom("WeightedMeanHeartRate", "bpm", activitySummary.getWeightedMeanHeartRate().getUom());
         result.averageHeartRateInBpm = (int) Double.parseDouble(activitySummary.getWeightedMeanHeartRate().getValue());
 
-        result.heartRates = generateHeartRates(garminActivity.getActivityDetails());
+        result.heartRates = generateHeartRates(garminActivityDetails);
 
         verifyUom("SumEnergy", "kilocalorie", activitySummary.getSumEnergy().getUom());
         result.totalCalories = Double.parseDouble(activitySummary.getSumEnergy().getValue());
 
-        result.notes = garminActivity.getActivityDescription();
+        result.notes = garminActivitySummary.getActivityDescription();
 
-        result.path = generatePaths(garminActivity.getActivityDetails());
+        result.path = generatePaths(garminActivityDetails);
 
         result.postToFacebook = false;
 
@@ -81,8 +78,8 @@ public class RunKeeperActivity {
         return result;
     }
 
-    private static int findMetricsIndexForKey(String key, DetailsMeasurement[] measurements) {
-        for (DetailsMeasurement measurement : measurements) {
+    private static int findMetricsIndexForKey(String key, GarminDetailsMeasurement[] measurements) {
+        for (GarminDetailsMeasurement measurement : measurements) {
             if (key.equals(measurement.getKey())) {
                 return measurement.getMetricsIndex();
             }
@@ -90,24 +87,24 @@ public class RunKeeperActivity {
         throw new IllegalArgumentException("Could not find key '" + key + "' in measurements.");
     }
 
-    private static RunKeeperHeartRate[] generateHeartRates(ActivityDetails details) {
+    private static RunKeeperHeartRate[] generateHeartRates(GarminActivityDetails details) {
         int heartRateIndex = findMetricsIndexForKey("directHeartRate", details.getMeasurements());
         int secondsElapsedIndex = findMetricsIndexForKey("sumElapsedDuration", details.getMeasurements());
         RunKeeperHeartRate[] result = new RunKeeperHeartRate[details.getMetrics().length];
-        Metrics[] metrics = details.getMetrics();
+        GarminMetrics[] metrics = details.getMetrics();
         for (int i = 0; i < result.length; i++) {
             result[i] = new RunKeeperHeartRate(metrics[i].getMetrics()[secondsElapsedIndex], metrics[i].getMetrics()[heartRateIndex].intValue());
         }
         return result;
     }
 
-    private static RunKeeperPath[] generatePaths(ActivityDetails details) {
+    private static RunKeeperPath[] generatePaths(GarminActivityDetails details) {
         int secondsElapsedIndex = findMetricsIndexForKey("sumElapsedDuration", details.getMeasurements());
         int latitudeIndex = findMetricsIndexForKey("directLatitude", details.getMeasurements());
         int longitudeIndex = findMetricsIndexForKey("directLongitude", details.getMeasurements());
         int altitudeIndex = findMetricsIndexForKey("directElevation", details.getMeasurements());
 
-        Metrics[] metrics = details.getMetrics();
+        GarminMetrics[] metrics = details.getMetrics();
         ArrayList<RunKeeperPath> result = new ArrayList<RunKeeperPath>(details.getMetrics().length);
         for (int i = 0; i < metrics.length; i++) {
             if (metrics[i].getMetrics()[latitudeIndex].doubleValue() == 0.0 || metrics[i].getMetrics()[longitudeIndex].doubleValue() == 0.0) {

@@ -1,7 +1,7 @@
 package com.johanahlen.runsync.garmin.activity;
 
-public class Query {
-    private Filters filters;
+public class GarminQuery {
+    private GarminFilters filters;
     private String sortOrder;
     private String sortField;
     private String activityStart;
@@ -10,7 +10,7 @@ public class Query {
     private String ignoreUntitled;
     private String ignoreNonGPS;
 
-    public Filters getFilters() {
+    public GarminFilters getFilters() {
         return filters;
     }
 

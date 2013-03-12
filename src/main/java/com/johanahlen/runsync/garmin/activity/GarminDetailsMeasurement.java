@@ -1,6 +1,6 @@
 package com.johanahlen.runsync.garmin.activity;
 
-public class DetailsMeasurement {
+public class GarminDetailsMeasurement {
 
     private Integer metricsIndex;
     private String key;

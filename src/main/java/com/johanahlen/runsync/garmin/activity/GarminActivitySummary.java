@@ -2,44 +2,41 @@ package com.johanahlen.runsync.garmin.activity;
 
 import org.joda.time.LocalDateTime;
 
-public class GarminActivity {
+public class GarminActivitySummary {
 
     private long activityId;
     private String activityName;
     private String activityDescription;
     private String locationName;
-    private Boolean isTitled;
-    private Boolean isElevationCorrected;
-    private Boolean isBarometricCapable;
-    private Boolean isSwimAlgorithmCapable;
-    private Boolean isActivityEdited;
-    private Boolean favorite;
-    private Boolean ispr;
+    private boolean isTitled;
+    private boolean isElevationCorrected;
+    private boolean isBarometricCapable;
+    private boolean isSwimAlgorithmCapable;
+    private boolean isActivityEdited;
+    private boolean favorite;
+    private boolean ispr;
     private long userId;
     private String username;
     private String displayname;
     private LocalDateTime uploadDate;
-    private UploadSource uploadApplication;
-    private UploadSource device;
+    private GarminUploadSource uploadApplication;
+    private GarminUploadSource device;
     private String deviceId;
     private String deviceImageUrl;
-    private Boolean isDeviceReleased;
+    private boolean isDeviceReleased;
     private String externalId;
-    private Field privacy;
-    private Long numTrackpoints;
-    private ActivityType activityType;
-    private Field eventType;
-    private TimeZone activityTimeZone;
+    private GarminField privacy;
+    private long numTrackpoints;
+    private GarminActivityType activityType;
+    private GarminField eventType;
+    private GarminTimeZone activityTimeZone;
     private String localizedSpeedLabel;
     private String localizedPaceLabel;
-    private ActivitySummary activitySummary;
-    //private ? totalLaps;
-    private Boolean garminSwimAlgorithm;
+    private GarminMeasurementSummaries activitySummary;
+    private boolean garminSwimAlgorithm;
     private LocalDateTime updatedDate;
     private String updatedDateFormatted;
     private String[] userRoles;
-
-    private ActivityDetails activityDetails;
 
     public long getActivityId() {
         return activityId;
@@ -101,11 +98,11 @@ public class GarminActivity {
         return uploadDate;
     }
 
-    public UploadSource getUploadApplication() {
+    public GarminUploadSource getUploadApplication() {
         return uploadApplication;
     }
 
-    public UploadSource getDevice() {
+    public GarminUploadSource getDevice() {
         return device;
     }
 
@@ -125,7 +122,7 @@ public class GarminActivity {
         return externalId;
     }
 
-    public Field getPrivacy() {
+    public GarminField getPrivacy() {
         return privacy;
     }
 
@@ -133,15 +130,15 @@ public class GarminActivity {
         return numTrackpoints;
     }
 
-    public ActivityType getActivityType() {
+    public GarminActivityType getActivityType() {
         return activityType;
     }
 
-    public Field getEventType() {
+    public GarminField getEventType() {
         return eventType;
     }
 
-    public TimeZone getActivityTimeZone() {
+    public GarminTimeZone getActivityTimeZone() {
         return activityTimeZone;
     }
 
@@ -153,7 +150,7 @@ public class GarminActivity {
         return localizedPaceLabel;
     }
 
-    public ActivitySummary getActivitySummary() {
+    public GarminMeasurementSummaries getActivitySummary() {
         return activitySummary;
     }
 
@@ -171,9 +168,5 @@ public class GarminActivity {
 
     public String[] getUserRoles() {
         return userRoles;
-    }
-
-    public ActivityDetails getActivityDetails() {
-        return activityDetails;
     }
 }

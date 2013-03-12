@@ -1,6 +1,6 @@
 package com.johanahlen.runsync.garmin.activity;
 
-public class Filters {
+public class GarminFilters {
     private String userId;
     private String userId_oper;
 

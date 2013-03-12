@@ -1,12 +1,12 @@
 package com.johanahlen.runsync.garmin.activity;
 
-public class ActivityDetails {
+public class GarminActivityDetails {
     private Long activityId;
     private Boolean isDetailsAvailable;
     private Long measurementCount;
     private Long metricsCount;
-    private DetailsMeasurement[] measurements;
-    private Metrics[] metrics;
+    private GarminDetailsMeasurement[] measurements;
+    private GarminMetrics[] metrics;
 
     public Long getActivityId() {
         return activityId;
@@ -24,11 +24,11 @@ public class ActivityDetails {
         return metricsCount;
     }
 
-    public DetailsMeasurement[] getMeasurements() {
+    public GarminDetailsMeasurement[] getMeasurements() {
         return measurements;
     }
 
-    public Metrics[] getMetrics() {
+    public GarminMetrics[] getMetrics() {
         return metrics;
     }
 }

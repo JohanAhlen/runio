@@ -1,6 +1,6 @@
 package com.johanahlen.runsync.garmin.activity;
 
-public class TimeZone extends Field {
+public class GarminTimeZone extends GarminField {
 
     private String abbr;
 

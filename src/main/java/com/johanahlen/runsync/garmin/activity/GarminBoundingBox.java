@@ -1,6 +1,6 @@
 package com.johanahlen.runsync.garmin.activity;
 
-public class BoundingBox {
+public class GarminBoundingBox {
 
     private Double minLatitude;
     private Double minLongitude;
