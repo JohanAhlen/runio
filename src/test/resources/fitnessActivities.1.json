@@ -1,0 +1,24 @@
+{"items": [
+    {
+        "duration": 1000,
+        "total_distance": 2000,
+        "has_path": true,
+        "entry_mode": "API",
+        "source": "RunKeeper",
+        "start_time": "Tue, 1 Jan 2013 12:00:00",
+        "type": "Running",
+        "uri": "/fitnessActivities/10"
+    },
+    {
+        "duration": 50.5,
+        "total_distance": 1000,
+        "has_path": true,
+        "entry_mode": "API",
+        "source": "RunKeeper",
+        "start_time": "Sun, 6 Jan 2013 22:00:00",
+        "type": "Running",
+        "uri": "/fitnessActivities/20"
+    }],
+    "next": "/fitnessActivities?page=1&pageSize=2&noEarlierThan=1970-01-01&noLaterThan=2013-03-15&modifiedNoEarlierThan=1970-01-01&modifiedNoLaterThan=2013-03-15",
+    "size": 4
+}

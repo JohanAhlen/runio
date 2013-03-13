@@ -1,0 +1,23 @@
+{"items": [
+    {
+        "duration": 3000,
+        "total_distance": 2400,
+        "has_path": true,
+        "entry_mode": "API",
+        "source": "RunKeeper",
+        "start_time": "Wed, 23 Jan 2013 19:30:00",
+        "type": "Running",
+        "uri": "/fitnessActivities/30"
+    },
+    {
+        "duration": 150.5,
+        "total_distance": 1300,
+        "has_path": true,
+        "entry_mode": "API",
+        "source": "RunKeeper",
+        "start_time": "Fri, 25 Jan 2013 23:10:10",
+        "type": "Running",
+        "uri": "/fitnessActivities/40"
+    }],
+    "size": 4
+}

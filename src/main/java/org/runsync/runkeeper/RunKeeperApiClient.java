@@ -20,8 +20,8 @@ public class RunKeeperApiClient {
     }
 
     public List<RunKeeperActivitySummary> retrieveAllActivitySummaries() {
+        System.out.println(runKeeperRestTemplate.getForObject("https://api.runkeeper.com/fitnessActivities", String.class));
         ActivitiesGetResponse response = runKeeperRestTemplate.getForObject("https://api.runkeeper.com/fitnessActivities", ActivitiesGetResponse.class);
-
         List<RunKeeperActivitySummary> summaries = new LinkedList<RunKeeperActivitySummary>();
         summaries.addAll(response.items);
         while (StringUtils.isNotEmpty(response.next)) {
