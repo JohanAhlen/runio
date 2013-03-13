@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
 @Configuration
-@ComponentScan(basePackages = "com.runsync.runsync")
+@ComponentScan(basePackages = "org.runsync")
 public class ApplicationConfig {
 
     @Bean

@@ -16,22 +16,30 @@ public class RunKeeperActivity {
     public static final String TYPE_RUNNING = "Running";
 
     private String type;
+
     @SerializedName("start_time")
     private LocalDateTime startTime;
+
     @SerializedName("total_distance")
     private double totalDistanceInKm;
+
     @SerializedName("duration")
     private double totalDurationInSeconds;
+
     @SerializedName("average_heart_rate")
     private int averageHeartRateInBpm;
+
     @SerializedName("heart_rate")
     private RunKeeperHeartRate[] heartRates;
+
     @SerializedName("total_calories")
     private double totalCalories;
     private String notes;
     private RunKeeperPath[] path;
+
     @SerializedName("post_to_facebook")
     private boolean postToFacebook;
+
     @SerializedName("post_to_twitter")
     private boolean postToTwitter;
 

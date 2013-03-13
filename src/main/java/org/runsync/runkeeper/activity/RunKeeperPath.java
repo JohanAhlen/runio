@@ -12,6 +12,7 @@ public class RunKeeperPath {
     private double secondsSinceStartOfActivity;
     private double latitude;
     private double longitude;
+
     @SerializedName("altitude")
     private double altitudeInMeters;
     private String type;

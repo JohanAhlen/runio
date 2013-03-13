@@ -6,66 +6,97 @@ public class GarminMeasurementSummaries {
 
     @SerializedName("SumSampleCountElevation")
     private GarminSummaryMeasurement sumSampleCountElevation;
+
     @SerializedName("SumSampleCountSpeed")
     private GarminSummaryMeasurement sumSampleCountSpeed;
+
     @SerializedName("SumSampleCountHeartRate")
     private GarminSummaryMeasurement sumSampleCountHeartRate;
+
     @SerializedName("MaxElevation")
     private GarminSummaryMeasurement maxElevation;
+
     @SerializedName("SumSampleCountMovingSpeed")
     private GarminSummaryMeasurement sumSampleCountMovingSpeed;
+
     @SerializedName("EndLatitude")
     private GarminSummaryMeasurement endLatitude;
+
     @SerializedName("EndLongitude")
     private GarminSummaryMeasurement endLongitude;
+
     @SerializedName("WeightedMeanMovingSpeed")
     private GarminSummaryMeasurement weightedMeanMovingSpeed;
+
     @SerializedName("MaxHeartRate")
     private GarminHeartRateMeasurement maxHeartRate;
+
     @SerializedName("MinSpeed")
     private GarminSummaryMeasurement minSpeed;
+
     @SerializedName("MinPace")
     private GarminSummaryMeasurement minPace;
+
     @SerializedName("WeightedMeanHeartRate")
     private GarminHeartRateMeasurement weightedMeanHeartRate;
+
     @SerializedName("MaxSpeed")
     private GarminSummaryMeasurement maxSpeed;
+
     @SerializedName("MaxPace")
     private GarminSummaryMeasurement maxPace;
+
     @SerializedName("SumEnergy")
     private GarminSummaryMeasurement sumEnergy;
+
     @SerializedName("SumElapsedDuration")
     private GarminSummaryMeasurement sumElapsedDuration;
+
     @SerializedName("BeginLatitude")
     private GarminSummaryMeasurement beginLatitude;
+
     @SerializedName("SumMovingDuration")
     private GarminSummaryMeasurement sumMovingDuration;
+
     @SerializedName("WeightedMeanSpeed")
     private GarminSummaryMeasurement weightedMeanSpeed;
+
     @SerializedName("WeightedMeanPace")
     private GarminSummaryMeasurement weightedMeanPace;
+
     @SerializedName("SumDuration")
     private GarminSummaryMeasurement sumDuration;
+
     @SerializedName("SumDistance")
     private GarminSummaryMeasurement sumDistance;
+
     @SerializedName("BeginLongitude")
     private GarminSummaryMeasurement beginLongitude;
+
     @SerializedName("SumSampleCountTimestamp")
     private GarminSummaryMeasurement sumSampleCountTimestamp;
+
     @SerializedName("MinHeartRate")
     private GarminHeartRateMeasurement minHeartRate;
+
     @SerializedName("MinElevation")
     private GarminSummaryMeasurement minElevation;
+
     @SerializedName("GainElevation")
     private GarminSummaryMeasurement gainElevation;
+
     @SerializedName("SumSampleCountLongitude")
     private GarminSummaryMeasurement sumSampleCountLongitude;
+
     @SerializedName("BeginTimestamp")
     private GarminSummaryMeasurement beginTimestamp;
+
     @SerializedName("SumSampleCountLatitude")
     private GarminSummaryMeasurement sumSampleCountLatitude;
+
     @SerializedName("EndTimestamp")
     private GarminSummaryMeasurement endTimestamp;
+
     @SerializedName("LossElevation")
     private GarminSummaryMeasurement lossElevation;
 

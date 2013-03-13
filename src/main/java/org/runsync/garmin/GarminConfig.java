@@ -1,13 +1,11 @@
 package org.runsync.garmin;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 import org.runsync.CookieInterceptor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -22,23 +20,20 @@ public class GarminConfig {
 
     @Value("${garmin.password}")
     private String password;
+
     @Value("${garmin.username}")
     private String username;
 
     @Bean
-    public ClientHttpRequestInterceptor clientHttpRequestInterceptor() {
+    public ClientHttpRequestInterceptor cookieInterceptor() {
         return new CookieInterceptor();
     }
 
-    @Lazy
     @Bean(name = "garminRestTemplate")
     public RestTemplate garminRestTemplate() {
         RestTemplate restTemplate = new RestTemplate();
-        List<HttpMessageConverter<?>> httpMessageConverters = new ArrayList<HttpMessageConverter<?>>();
-        httpMessageConverters.add(new GarminGsonHttpMessageConverter());
-        httpMessageConverters.add(new StringHttpMessageConverter());
-        restTemplate.setMessageConverters(httpMessageConverters);
-        restTemplate.setInterceptors(Collections.singletonList(clientHttpRequestInterceptor()));
+        restTemplate.setMessageConverters(Arrays.asList(new HttpMessageConverter<?>[] { new GarminGsonHttpMessageConverter(), new StringHttpMessageConverter() }));
+        restTemplate.setInterceptors(Collections.singletonList(cookieInterceptor()));
         signInTwice(restTemplate);
         return restTemplate;
     }

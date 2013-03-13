@@ -8,11 +8,14 @@ public class RunKeeperActivitySummary {
     @SerializedName("has_map")
     private boolean hasMap;
     private double duration;
+
     @SerializedName("total_distance")
     private double totalDistance;
+
     @SerializedName("entry_mode")
     private String entryMode;
     private String source;
+
     @SerializedName("start_time")
     private LocalDateTime startTime;
     private String type;

@@ -6,6 +6,7 @@ public class RunKeeperHeartRate {
 
     @SerializedName("timestamp")
     private double secondsSinceStartOfActivity;
+
     @SerializedName("heart_rate")
     private int heartRateInBpm;
 

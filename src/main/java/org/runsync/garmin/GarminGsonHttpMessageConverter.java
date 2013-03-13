@@ -26,7 +26,7 @@ import org.springframework.util.ReflectionUtils;
 
 public class GarminGsonHttpMessageConverter extends AbstractHttpMessageConverter<Object> {
 
-    private static final DateTimeFormatter sqlDateTimeFormatter = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss.S");
+    private static final DateTimeFormatter SQL_DATE_TIME_FORMATTER = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss.S");
 
     private Gson gson;
 
@@ -50,7 +50,7 @@ public class GarminGsonHttpMessageConverter extends AbstractHttpMessageConverter
                 Field updatedDateField = ReflectionUtils.findField(GarminActivitySummary.class, "updatedDate");
                 ReflectionUtils.makeAccessible(updatedDateField);
 
-                ReflectionUtils.setField(updatedDateField, original, LocalDateTime.parse(updatedDateString, sqlDateTimeFormatter));
+                ReflectionUtils.setField(updatedDateField, original, LocalDateTime.parse(updatedDateString, SQL_DATE_TIME_FORMATTER));
                 return original;
             }
         });

@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 public class GarminFilters {
 
     private String userId;
+
     @SerializedName("userId_oper")
     private String userIdOper;
 
