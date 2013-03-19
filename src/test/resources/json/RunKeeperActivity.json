@@ -1,0 +1,114 @@
+{
+    "uri": "/fitnessActivities/40",
+    "userID": 1234567890,
+    "type": "Other",
+    "secondary_type" : "Running backwards",
+    "equipment": "None",
+    "start_time": "Sat, 1 Jan 2011 12:00:00",
+    "total_distance": 70,
+    "distance": [
+        {
+            "timestamp": 2.1,
+            "distance": 20.4
+        },
+        {
+            "timestamp": 7.0,
+            "distance": 40.7
+        }
+    ],
+    "duration": 10,
+    "average_heart_rate": 160,
+    "heart_rate": [
+        {
+            "timestamp": 2,
+            "heart_rate": 150
+        },
+        {
+            "timestamp": 7,
+            "heart_rate": 170
+        }
+    ],
+    "total_calories": 60.3,
+    "calories": [
+        {
+            "timestamp": 2.0,
+            "calories": 20.1
+        },
+        {
+            "timestamp": 7.1,
+            "calories": 30.3
+        }
+    ],
+    "climb": 30.4,
+    "notes": "I'm a note",
+    "is_live": false,
+    "path": [
+        {
+            "timestamp": 0,
+            "altitude": 0,
+            "longitude": -70.95182336425782,
+            "latitude": 42.312620297384676,
+            "type": "start"
+        },
+        {
+            "timestamp": 10,
+            "altitude": 10,
+            "longitude": -70.95255292510987,
+            "latitude": 42.31230294498018,
+            "type": "end"
+        }
+    ],
+    "images": [
+        {
+            "timestamp": 10.4,
+            "longitude": -70.95255292510987,
+            "latitude": 42.31230294498018,
+            "uri": "/fitnessActivities/40/image",
+            "thumbnail_uri": "/fitnessActivities/40/thumb"
+        }
+    ],
+    "source": "RunKeeper",
+    "entry_mode": "API",
+    "activity": "http://www.runkeeper.com/activity/123",
+    "comments": "/fitnessActivities/40/comments",
+    "previous": "/fitnessActivities/39",
+    "next": "/fitnessActivities/41",
+    "nearest_teammate_fitness_activities": [
+        "/fitnessActivities/50",
+        "/fitnessActivities/52"
+    ],
+    "nearest_strength_training_activity" : "/strengthTrainingActivities/1",
+    "nearest_teammate_strength_training_activities": [
+        "/strengthTrainingActivities/2",
+        "/strengthTrainingActivities/3"
+    ],
+    "nearest_background_activity": "/backgroundActivities/1",
+    "nearest_teammate_background_activities": [
+        "/backgroundActivities/2",
+        "/backgroundActivities/3"
+    ],
+    "nearest_sleep": "/sleepSet/1",
+    "nearest_teammate_sleep": [
+        "/sleepSet/2",
+        "/sleepSet/3"
+    ],
+    "nearest_nutrition": "/nutritionSet/1",
+    "nearest_teammate_nutrition": [
+        "/nutritionSet/2",
+        "/nutritionSet/3"
+    ],
+    "nearest_weight": "/weightSet/1",
+    "nearest_teammate_weight": [
+        "/weightSet/2",
+        "/weightSet/3"],
+    "nearest_general_measurement": "/generalMeasurementSet/1",
+    "nearest_teammate_general_measurements": [
+        "/generalMeasurementSet/2",
+        "/generalMeasurementSet/3"
+    ],
+    "nearest_diabetes": "/diabetesMeasurementSet/1",
+    "nearest_teammate_diabetes": [
+        "/diabetesMeasurementSet/2",
+        "/diabetesMeasurementSet/3"
+    ]
+}
