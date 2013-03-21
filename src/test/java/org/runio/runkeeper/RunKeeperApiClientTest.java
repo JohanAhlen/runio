@@ -5,7 +5,6 @@ import static org.hamcrest.core.StringContains.*;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.*;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.*;
 import java.util.List;
-import org.joda.time.LocalDateTime;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -52,14 +51,9 @@ public class RunKeeperApiClientTest {
 
         assertEquals(4, result.size());
 
-        RunKeeperActivity thirdItem = result.get(2);
-        assertEquals(3000.0, thirdItem.getTotalDurationInSeconds());
-        assertEquals(2400.0, thirdItem.getTotalDistanceInKm());
-        assertEquals("API", thirdItem.getEntryMode());
-        assertEquals("RunKeeper", thirdItem.getSource());
-        assertEquals(new LocalDateTime(2013, 1, 23, 19, 30, 0), thirdItem.getStartTime());
-        assertEquals("Running", thirdItem.getType());
-        assertEquals(true, thirdItem.getPathAvailable().booleanValue());
-        assertEquals("/fitnessActivities/30", thirdItem.getUri());
+        assertEquals(1000.0, result.get(0).getTotalDurationInSeconds());
+        assertEquals(2000.0, result.get(1).getTotalDurationInSeconds());
+        assertEquals(3000.0, result.get(2).getTotalDurationInSeconds());
+        assertEquals(4000.0, result.get(3).getTotalDurationInSeconds());
     }
 }

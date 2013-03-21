@@ -215,7 +215,14 @@ public class RunKeeperActivityTest {
     @Autowired
     private Gson runKeeperGson;
 
+    /*
+     Apart from making sure that the JSON deserialiation works this test also verifies that we are compatible
+     with the RunKeeper Health Graph API defined at
 
+        developer.runkeeper.com/healthgraph/fitness-activities
+
+     Hence the complete JSON input. It does not care for optional values and whether it's for read or write.
+     */
     @Test
     public void should_convert_from_json() throws Exception {
         RunKeeperActivity runKeeperActivity = runKeeperGson.fromJson(JSON_DATA, RunKeeperActivity.class);

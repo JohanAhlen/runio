@@ -1,10 +1,8 @@
-package org.runio;
+package org.runio.test;
 
-import java.util.LinkedList;
 import java.util.List;
 import org.runio.context.ApplicationConfig;
 import org.runio.garmin.GarminConnectClient;
-import org.runio.garmin.activity.GarminActivityDetails;
 import org.runio.garmin.activity.GarminActivitySummary;
 import org.runio.runkeeper.RunKeeperApiClient;
 import org.runio.runkeeper.activity.RunKeeperActivity;
@@ -23,17 +21,17 @@ public class RunSyncApplication {
 
     public void syncGarminToRunKeeper(long garminStartActivityId) {
         List<GarminActivitySummary> garminActivities = garminConnectClient.retrieveAllActivitySummaries();
-        List<RunKeeperActivity> runKeeperActivities = new LinkedList<RunKeeperActivity>();
-
-        for(GarminActivitySummary garminActivitySummary : garminActivities) {
-            if (garminActivitySummary.getActivityId() >= garminStartActivityId) {
-                GarminActivityDetails garminActivityDetails = garminConnectClient.retrieveActivityDetails(garminActivitySummary.getActivityId());
-                runKeeperActivities.add(new RunKeeperActivity.Builder().fromGarminActivity(garminActivitySummary, garminActivityDetails).build());
-            }
-        }
-        for (RunKeeperActivity runKeeperActivity : runKeeperActivities) {
-            runKeeperApiClient.postActivity(runKeeperActivity);
-        }
+//        List<RunKeeperActivity> runKeeperActivities = new LinkedList<RunKeeperActivity>();
+//
+//        for(GarminActivitySummary garminActivitySummary : garminActivities) {
+//            if (garminActivitySummary.getActivityId() >= garminStartActivityId) {
+//                GarminActivityDetails garminActivityDetails = garminConnectClient.retrieveActivityDetails(garminActivitySummary.getActivityId());
+//                runKeeperActivities.add(new RunKeeperActivity.Builder().fromGarminActivity(garminActivitySummary, garminActivityDetails).build());
+//            }
+//        }
+//        for (RunKeeperActivity runKeeperActivity : runKeeperActivities) {
+//            runKeeperApiClient.postActivity(runKeeperActivity);
+//        }
     }
 
     private void readAllActivitiesFromRunKeeper() {

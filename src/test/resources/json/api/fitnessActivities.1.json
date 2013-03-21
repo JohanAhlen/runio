@@ -10,7 +10,7 @@
         "uri": "/fitnessActivities/10"
     },
     {
-        "duration": 50.5,
+        "duration": 2000,
         "total_distance": 1000,
         "has_path": true,
         "entry_mode": "API",
