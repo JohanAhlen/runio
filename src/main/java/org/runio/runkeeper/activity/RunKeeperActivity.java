@@ -5,13 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 import org.joda.time.LocalDateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
-import org.runio.garmin.activity.GarminActivityDetails;
-import org.runio.garmin.activity.GarminActivitySummary;
-import org.runio.garmin.activity.GarminDetailsMeasurement;
-import org.runio.garmin.activity.GarminMeasurementSummaries;
-import org.runio.garmin.activity.GarminMetrics;
+import org.runio.garmin.activity.*;
 
 public class RunKeeperActivity {
 
@@ -107,7 +101,7 @@ public class RunKeeperActivity {
     @SerializedName("climb")
     private Double totalClimbInM;
     @SerializedName("total_distance")
-    private Double totalDistanceInKm;
+    private Double totalDistanceInM;
     @SerializedName("duration")
     private Double totalDurationInSeconds;
     private String type;
@@ -122,7 +116,6 @@ public class RunKeeperActivity {
 
     public static class Builder {
 
-        private static final DateTimeFormatter inputFormat = DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").withZoneUTC();
         private RunKeeperActivity runKeeperActivity;
 
         public Builder() {
@@ -140,7 +133,8 @@ public class RunKeeperActivity {
             int secondsElapsedIndex = findMetricsIndexForKey("sumElapsedDuration", details.getMeasurements());
             List<RunKeeperHeartRate> result = new ArrayList<RunKeeperHeartRate>(details.getMetrics().length);
             for (GarminMetrics metric : details.getMetrics()) {
-                result.add(new RunKeeperHeartRate(metric.getMetrics()[secondsElapsedIndex], (int) metric.getMetrics()[heartRateIndex]));
+                if ((int) metric.getMetrics()[heartRateIndex] < 190)
+                    result.add(new RunKeeperHeartRate(metric.getMetrics()[secondsElapsedIndex], (int) metric.getMetrics()[heartRateIndex]));
             }
 
             return result;
@@ -169,6 +163,15 @@ public class RunKeeperActivity {
             return result;
         }
 
+        private static boolean hasMetricsForPath(GarminDetailsMeasurement[] measurements) {
+            for (GarminDetailsMeasurement measurement : measurements) {
+                if ("directLatitude".equals(measurement.getKey())) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         private static int findMetricsIndexForKey(String key, GarminDetailsMeasurement[] measurements) {
             for (GarminDetailsMeasurement measurement : measurements) {
                 if (key.equals(measurement.getKey())) {
@@ -184,22 +187,45 @@ public class RunKeeperActivity {
 
         public Builder fromGarminActivity(GarminActivitySummary summary, GarminActivityDetails details) {
             GarminMeasurementSummaries measurementSummaries = summary.getActivitySummary();
+
+            boolean heartRateRecorded = measurementSummaries.getWeightedMeanHeartRate() != null;
+
             verifyUom("SumDistance", "kilometer", measurementSummaries.getSumDistance().getUom());
             verifyUom("SumElapsedDuration", "second", measurementSummaries.getSumElapsedDuration().getUom());
-            verifyUom("WeightedMeanHeartRate", "bpm", measurementSummaries.getWeightedMeanHeartRate().getUom());
+            if (heartRateRecorded) {
+                verifyUom("WeightedMeanHeartRate", "bpm", measurementSummaries.getWeightedMeanHeartRate().getUom());
+            }
             verifyUom("SumEnergy", "kilocalorie", measurementSummaries.getSumEnergy().getUom());
 
-            return withType(RunKeeperActivity.TYPE_RUNNING)
-                    .withStartTime(LocalDateTime.parse(measurementSummaries.getBeginTimestamp().getValue(), inputFormat))
+            Builder builder = fromGarminActivityType(summary.getActivityType())
+                    .withStartTime(LocalDateTime.parse(measurementSummaries.getBeginTimestamp().getValue(), GarminActivitySummary.GARMIN_TIME_FORMAT))
                     .withTotalDistanceInKm(Double.parseDouble(measurementSummaries.getSumDistance().getValue()))
                     .withTotalDurationInSeconds(Double.parseDouble(measurementSummaries.getSumElapsedDuration().getValue()))
-                    .withAverageHeartRateInBpm((int) Double.parseDouble(measurementSummaries.getWeightedMeanHeartRate().getValue()))
-                    .withHeartRates(generateHeartRates(details))
                     .withTotalCalories(Double.parseDouble(measurementSummaries.getSumEnergy().getValue()))
                     .withNotes(summary.getActivityDescription())
-                    .withPath(generatePaths(details))
                     .withPostToFacebook(false)
                     .withPostToTwitter(false);
+            if (heartRateRecorded) {
+                builder.withAverageHeartRateInBpm((int) Double.parseDouble(measurementSummaries.getWeightedMeanHeartRate().getValue()))
+                        .withHeartRates(generateHeartRates(details));
+            }
+            if (hasMetricsForPath(details.getMeasurements())) {
+                builder.withPath(generatePaths(details));
+            }
+            return builder;
+        }
+
+        public Builder fromGarminActivityType(GarminActivityType garminType) {
+            switch (garminType.getKey()) {
+                case GarminActivityType.TYPE_KEY_CROSS_COUNTRY_SKIING :
+                    runKeeperActivity.type = RunKeeperActivity.TYPE_CROSS_COUNTRY_SKIING;
+                    break;
+                case GarminActivityType.TYPE_KEY_INDOOR_CYCLING :
+                    runKeeperActivity.type = RunKeeperActivity.TYPE_CYCLING;
+                    break;
+                default : runKeeperActivity.type = RunKeeperActivity.TYPE_RUNNING;
+            }
+            return this;
         }
 
         public Builder withType(String type) {
@@ -213,7 +239,7 @@ public class RunKeeperActivity {
         }
 
         public Builder withTotalDistanceInKm(double totalDistanceInKm) {
-            runKeeperActivity.totalDistanceInKm = totalDistanceInKm;
+            runKeeperActivity.totalDistanceInM = totalDistanceInKm;
             return this;
         }
 
@@ -402,8 +428,8 @@ public class RunKeeperActivity {
         return totalClimbInM;
     }
 
-    public Double getTotalDistanceInKm() {
-        return totalDistanceInKm;
+    public Double getTotalDistanceInM() {
+        return totalDistanceInM;
     }
 
     public Double getTotalDurationInSeconds() {

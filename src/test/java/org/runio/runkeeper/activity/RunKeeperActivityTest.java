@@ -233,7 +233,7 @@ public class RunKeeperActivityTest {
         assertEquals(SECONDARY_TYPE, runKeeperActivity.getTypeOther());
         assertEquals(EQUIPMENT, runKeeperActivity.getEquipment());
         assertEquals(START_TIME_LDT, runKeeperActivity.getStartTime());
-        assertEquals(TOTAL_DISTANCE, runKeeperActivity.getTotalDistanceInKm().doubleValue(), 0);
+        assertEquals(TOTAL_DISTANCE, runKeeperActivity.getTotalDistanceInM().doubleValue(), 0);
         assertEquals(2, runKeeperActivity.getDistanceMeasurements().size());
         assertEquals(DISTANCE_1_TIMESTAMP, runKeeperActivity.getDistanceMeasurements().get(0).getSecondsSinceStartOfActivity(), 0);
         assertEquals(DISTANCE_1_DISTANCE, runKeeperActivity.getDistanceMeasurements().get(0).getDistanceInKm(), 0);

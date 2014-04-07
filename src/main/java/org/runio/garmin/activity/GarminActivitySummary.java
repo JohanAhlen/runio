@@ -1,42 +1,48 @@
 package org.runio.garmin.activity;
 
 import org.joda.time.LocalDateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 public class GarminActivitySummary {
 
+    public static final DateTimeFormatter GARMIN_TIME_FORMAT = DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").withZoneUTC();
+
     private long activityId;
+
     private String activityName;
     private String activityDescription;
-    private String locationName;
-    private boolean isTitled;
-    private boolean isElevationCorrected;
-    private boolean isBarometricCapable;
-    private boolean isSwimAlgorithmCapable;
-    private boolean isActivityEdited;
-    private boolean favorite;
-    private boolean ispr;
-    private long userId;
-    private String username;
-    private String displayname;
-    private LocalDateTime uploadDate;
-    private GarminUploadSource uploadApplication;
+
+    private GarminMeasurementSummaries activitySummary;
+    private GarminTimeZone activityTimeZone;
+    private GarminActivityType activityType;
     private GarminUploadSource device;
     private String deviceId;
     private String deviceImageUrl;
-    private boolean isDeviceReleased;
-    private String externalId;
-    private GarminField privacy;
-    private long numTrackpoints;
-    private GarminActivityType activityType;
+    private String displayname;
     private GarminField eventType;
-    private GarminTimeZone activityTimeZone;
+    private String externalId;
+    private boolean favorite;
+    private boolean garminSwimAlgorithm;
+    private boolean isActivityEdited;
+    private boolean isBarometricCapable;
+    private boolean isDeviceReleased;
+    private boolean isElevationCorrected;
+    private boolean ispr;
+    private boolean isSwimAlgorithmCapable;
+    private boolean isTitled;
+    private String locationName;
     private String localizedSpeedLabel;
     private String localizedPaceLabel;
-    private GarminMeasurementSummaries activitySummary;
-    private boolean garminSwimAlgorithm;
+    private long numTrackpoints;
+    private GarminField privacy;
+    private GarminUploadSource uploadApplication;
+    private LocalDateTime uploadDate;
+    private long userId;
+    private String username;
+    private String[] userRoles;
     private LocalDateTime updatedDate;
     private String updatedDateFormatted;
-    private String[] userRoles;
 
     public long getActivityId() {
         return activityId;
@@ -169,4 +175,5 @@ public class GarminActivitySummary {
     public String[] getUserRoles() {
         return userRoles;
     }
+
 }

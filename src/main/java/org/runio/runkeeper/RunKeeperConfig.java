@@ -39,8 +39,10 @@ public class RunKeeperConfig {
         return new ClientHttpRequestInterceptor() {
             @Override
             public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution) throws IOException {
-                if (request.getURI().getPath().startsWith("/fitnessActivities")) {
+                if (request.getURI().getPath().matches("/fitnessActivities")) {
                     request.getHeaders().set("Content-Type", "application/vnd.com.runkeeper.NewFitnessActivity+json");
+                } else if (request.getURI().getPath().matches("/fitnessActivities/[0-9]+")) {
+                    request.getHeaders().set("Content-Type", "application/vnd.com.runkeeper.FitnessActivity+json");
                 }
                 return execution.execute(request, body);
             }
